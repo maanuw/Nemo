@@ -1,4 +1,4 @@
-import React, {Fragment, useState, useEffect} from 'react' 
+import React, {Fragment, useState, useEffect} from 'react'
 import './App.css';
 import {BrowserRouter as Router, Routes, Route, Navigate} from "react-router-dom";
 import { toast } from 'react-toastify';
@@ -12,6 +12,7 @@ import Register from "./pages/Register";
 import Login from "./pages/Login";
 import DentistLogin from "./pages/DentistLogin";
 import DentistDashboard from "./pages/DentistDashboard";
+import Profile from "./pages/Profile";
 
 
 toast.configure();
@@ -52,6 +53,7 @@ function App() {
             <Route exact path="/register" element={!isAuthenticated  ? (<Register setAuth={setAuth}/>) : (<Navigate to="/login"/>)} />
             <Route exact path="/dashboard" element={isAuthenticated ?  (<Dashboard setAuth={setAuth}/>) : (<Navigate to="/login"/>)} />
             <Route exact path="/dentist-dashboard" element={isAuthenticated ?  (<DentistDashboard setAuth={setAuth}/>) : (<Navigate to="/dentistlogin"/>)} />
+						<Route exact path="/profile" element={isAuthenticated ?  (<Profile setAuth={setAuth}/>) : (<Navigate to="/profile"/>)} />
           </Routes>
         </div>
       </Router>
