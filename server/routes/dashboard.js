@@ -1,20 +1,17 @@
 const router = require("express").Router();
 const pool = require("../db");
 const authorization = require("../middleware/authorization");
+const Patient = require("../class/Patient");
 
 router.get("/", authorization, async (req, res)=>{
     try {
-        //res.json(req.user);
-        const user = await pool.query("SELECT user_name FROM users WHERE user_id = $1", [
-            req.user
-        ]);
-
-        res.json(user.rows[0]);
+        let patient = new Patient(req.user);
+        //console.log(await patient.getProfile());
+        res.json(await patient.getProfile());
     } catch (error) {
         console.log(error.message);
         res.status(500).send("Server Error");
     }
-
 });
 
 module.exports = router;
