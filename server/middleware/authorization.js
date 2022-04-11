@@ -13,7 +13,7 @@ module.exports = async (req, res, next) => {
         //if token verified , below function is going to return a payload that we can use within our routes.
         const payload = jwt.verify(jwtToken, process.env.JWTSECRET);
         req.user = payload.user;
-
+        //console.log(payload.user);
         next();
     }catch (error){
         console.error(error.message);

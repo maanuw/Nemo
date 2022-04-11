@@ -29,6 +29,8 @@ app.use('/dashboard', require("./routes/dashboard"));
 //treatment routes.
 app.use('/treatment', require("./routes/treatment"));
 
+//appointment routes.
+app.use('/appointment', require("./routes/appointment"));
 
 const port = process.env.PORT || 3001;
 app.listen(port, () => {
