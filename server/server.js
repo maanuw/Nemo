@@ -20,12 +20,14 @@ app.use((req, res, next) => {
 
 //------ ROUTES -----------------------//
 
-// Register and login routes
+// Register and login routes.
 app.use('/auth', require("./routes/jwtAuth"));
 
-//dashboard routes
+//dashboard routes.
 app.use('/dashboard', require("./routes/dashboard"));
 
+//treatment routes.
+app.use('/treatment', require("./routes/treatment"));
 
 
 const port = process.env.PORT || 3001;

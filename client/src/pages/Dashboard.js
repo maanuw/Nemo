@@ -1,5 +1,6 @@
 import React, { Fragment, useState, useEffect } from "react";
 import Navbar from "../components/Navbar";
+import AvailableTreatments from "../components/TreatmentsCarousel";
 
 
 const Dashboard = ({ setAuth }) => {
@@ -14,7 +15,7 @@ const Dashboard = ({ setAuth }) => {
             });
             const parseRes = await response.json();
 
-            setName(parseRes.user_name)
+            setName(parseRes.user_name);
 
         } catch (error) {
             console.error(error.message);
@@ -29,8 +30,14 @@ const Dashboard = ({ setAuth }) => {
     <Fragment>
         <Navbar setAuth={setAuth}/>
         <div className="container">
-            <h1>Dashboard {name}</h1>
-            
+            <h1>Welcome {name}!</h1>
+            <div className="container">
+                <hr/>
+                <h2>Available Treatments</h2>
+                <hr/>
+                <AvailableTreatments />
+            </div>
+            <hr/>
         </div>
     </Fragment>
     );
