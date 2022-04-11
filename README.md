@@ -9,14 +9,5 @@ Prerequisites:
 - Similarly cd in to server directory and run `npm run start`
 - Great! You have successfully started your client and server. 
 
-### Connect to Heroku Database:
-- git pull on `develop` branch.
-- run `cd server` and edit the env file as follows:
-- The .env file should only have these entries.
-- JWTSECRET 
-- DATABASE_URL
-> Get credentials from the owner of this repo.
-
-### Connect your pgAdmin to the Heroku database.
-- Follow steps on this link https://medium.com/@vapurrmaid/getting-started-with-heroku-postgres-and-pgadmin-run-on-part-2-90d9499ed8fb
-> Get credentials from the owner of this repo.
+> You may receive an error while starting your server since you will have to configure your database.
+- Note: Get a copy of DB from heroku or the repo owner.

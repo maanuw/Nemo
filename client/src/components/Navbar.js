@@ -55,4 +55,4 @@ function Navbar({setAuth}) {
   )
 }
 
-export default Navbar;
+export default Navbar
