@@ -1,0 +1,58 @@
+body{
+    margin:0px;
+
+}
+
+.title{
+    margin-top:120px;
+    margin-left:150px;
+  }
+  #welcome{
+      font-weight:bolder;
+      font-size: 5em;
+  }
+  #special-title{
+    background: linear-gradient(180deg, #ABD2F7 60.42%, rgba(7, 2, 247, 0.35) 91.8%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-fill-color: transparent;
+  }
+  #logo{
+      width:10%;
+  }
+  .branch{
+    padding-top:100px;
+    background-color: #7596EC;
+    padding-bottom:100px;
+    display: flex;
+    justify-content: center;
+  }
+  .cardAttr{
+    width:50%;
+    border-radius:10px;
+    display: flex;
+    justify-content: center;
+
+  }
+
+  .custom-shape-divider-bottom-1649799698 {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      overflow: hidden;
+      line-height: 0;
+      transform: rotate(180deg);
+  }
+
+  .custom-shape-divider-bottom-1649799698 svg {
+      position: relative;
+      display: block;
+      width: calc(123% + 1.3px);
+      height: 246px;
+  }
+
+  .custom-shape-divider-bottom-1649799698 .shape-fill {
+      fill: #7596EC;
+  }

@@ -1,0 +1,21 @@
+.branchAttribute{
+    display:flex; 
+    justify-content: center;
+}
+
+#button{
+    margin-top: 10px;
+    color:white;
+}
+
+.sidelogo{
+    width:6%;
+}
+
+.clinicName{
+    font-weight: bold;
+    
+}
+.button-color{
+    color:#2E5BE0; 
+}

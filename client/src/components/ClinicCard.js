@@ -1,43 +1,46 @@
 import React, { Fragment, useState, useEffect } from "react";
+import logo from '../assets/Shop.png';
+import location from '../assets/location.png';
+import phone from '../assets/phone.png';
+import '../css/ClientCard.css';
 
-function AppointmentsCard(){
-    //Code to query the backend.
-    const [data, setTreatments] = useState([]);
-
-    async function getTreatments() {
-        try {
-            const response = await fetch("http://localhost:3001/dashboard/branch/info", {
-                method: "GET",
-                headers: { token: localStorage.token }
-            });
-            const parseRes = await response.json();
-            setTreatments(parseRes);
+function AppointmentsCard({data}){
     
-        } catch (error) {
-            console.log(error.message);
-        }
-    }
-
-    useEffect(() => {
-        getTreatments()
-    }, [])
-
-    //
 
     return (
-        <div class="card text-center">
-            <div class="card-header">
-                Clinic.
-            </div>
-            <div class="card-body">
-                <h5 class="card-title">Special title treatment</h5>
-                <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                <a href="#" class="btn btn-primary">Go somewhere</a>
-            </div>
-            <div class="card-footer text-muted">
-                2 days ago
-            </div>
-        </div>
+
+
+        <div class="branch">
+
+        <div class="card text-center cardAttr">
+                 <div class="card-header ">
+                     <h3 class="clinicName">{data.branch_name} </h3>
+                 </div>
+      
+                 <div class="card-body">
+                   <img src={logo}/>
+                     <div class="location">
+                     </div>
+
+                     <div class="branchAttribute">
+                     <img class="sidelogo"src={location}/>
+                        <p>Location: </p> 
+                     <h5 class="card-title">{data.address}</h5>
+                     </div>
+                     
+                     <div class="branchAttribute">
+                     <img class="sidelogo" src={phone}/>
+                         <p>Phone Number:</p>
+                     <p class="card-text">{data.phone_number} </p>
+                     </div>
+                    
+                     <a href="#" class="btn btn-primary">
+                         <p id="button">Select Branch</p>
+                         </a>
+                 </div>
+             </div>
+      
+      </div>
     )
 }
 

@@ -23,6 +23,9 @@ app.use((req, res, next) => {
 // Register and login routes.
 app.use('/auth', require("./routes/jwtAuth"));
 
+//branch route.
+app.use('/branch', require("./routes/branch"));
+
 //dashboard routes.
 app.use('/dashboard', require("./routes/dashboard"));
 
