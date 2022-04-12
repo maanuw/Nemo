@@ -15,6 +15,7 @@ import DentistDashboard from "./pages/DentistDashboard";
 import Profile from "./pages/Profile";
 import Home from "./pages/Homepage"
 import Homepage from './pages/Homepage';
+import ReceptionDashboard from './pages/ReceptionDashboard';
 toast.configure();
 
 function App() {
@@ -55,6 +56,7 @@ function App() {
             <Route exact path="/dentist-dashboard" element={isAuthenticated ?  (<DentistDashboard setAuth={setAuth}/>) : (<Navigate to="/dentistlogin"/>)} />
 						<Route exact path="/profile" element={isAuthenticated ?  (<Profile setAuth={setAuth}/>) : (<Navigate to="/profile"/>)} />
 						<Route exact path="/home" element={!isAuthenticated ?  (<Homepage setAuth={setAuth}/>) : (<Navigate to="/home"/>)} />
+            <Route exact path="/reception-dashboard" element={isAuthenticated ?  (<ReceptionDashboard setAuth={setAuth}/>) : (<Navigate to="/reception-dashboard"/>)} />
           </Routes>
         </div>
       </Router>
