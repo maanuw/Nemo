@@ -26,16 +26,16 @@ router.post("/", authorization, async (req, res)=>{
     }
 }); 
 
-router.get("/upcoming", authorization, async (req, res)=>{
- try {
- const appointments = await pool.query("SELECT * FROM appointments");
- //console.log(response);
+router.get("/upcoming", authorization, async (req, res) => {
+    try {
+        const appointments = await pool.query("SELECT * FROM appointments");
+        //console.log(response);
 
- res.json(appointments.rows);
- } catch (error) {
- console.log(error.message);
- res.status(500).send("Server Error");
- }
+        res.json(appointments.rows);
+    } catch (error) {
+        console.log(error.message);
+        res.status(500).send("Server Error");
+    }
 });
 
 module.exports = router;

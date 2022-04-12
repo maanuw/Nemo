@@ -55,12 +55,8 @@ function App() {
             <Route exact path="/dashboard" element={isAuthenticated ?  (<Dashboard setAuth={setAuth}/>) : (<Navigate to="/login"/>)} />
             <Route exact path="/dentist-dashboard" element={isAuthenticated ?  (<DentistDashboard setAuth={setAuth}/>) : (<Navigate to="/dentistlogin"/>)} />
 						<Route exact path="/profile" element={isAuthenticated ?  (<Profile setAuth={setAuth}/>) : (<Navigate to="/profile"/>)} />
-<<<<<<< HEAD
 						<Route exact path="/home" element={isAuthenticated ?  (<Homepage setAuth={setAuth}/>) : (<Navigate to="/home"/>)} />
-=======
-						<Route exact path="/home" element={!isAuthenticated ?  (<Homepage setAuth={setAuth}/>) : (<Navigate to="/home"/>)} />
             <Route exact path="/reception-dashboard" element={isAuthenticated ?  (<ReceptionDashboard setAuth={setAuth}/>) : (<Navigate to="/reception-dashboard"/>)} />
->>>>>>> develop
           </Routes>
         </div>
       </Router>
