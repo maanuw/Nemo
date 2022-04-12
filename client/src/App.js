@@ -13,8 +13,8 @@ import Login from "./pages/Login";
 import DentistLogin from "./pages/DentistLogin";
 import DentistDashboard from "./pages/DentistDashboard";
 import Profile from "./pages/Profile";
-
-
+import Home from "./pages/Homepage"
+import Homepage from './pages/Homepage';
 toast.configure();
 
 function App() {
@@ -54,9 +54,12 @@ function App() {
             <Route exact path="/dashboard" element={isAuthenticated ?  (<Dashboard setAuth={setAuth}/>) : (<Navigate to="/login"/>)} />
             <Route exact path="/dentist-dashboard" element={isAuthenticated ?  (<DentistDashboard setAuth={setAuth}/>) : (<Navigate to="/dentistlogin"/>)} />
 						<Route exact path="/profile" element={isAuthenticated ?  (<Profile setAuth={setAuth}/>) : (<Navigate to="/profile"/>)} />
+						<Route exact path="/home" element={!isAuthenticated ?  (<Homepage setAuth={setAuth}/>) : (<Navigate to="/home"/>)} />
           </Routes>
         </div>
       </Router>
+
+      {/*  comments      some code here to print the card as many numbner of times as the clinics in database.*/}      
     </Fragment>
   );
 }

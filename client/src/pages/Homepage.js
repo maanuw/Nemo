@@ -1,10 +1,9 @@
 import React, { Fragment, useState, useEffect } from "react";
-import Navbar from "../components/Navbar";
-import AvailableTreatments from "../components/TreatmentsCarousel";
-import AppointmentsCard from "../components/AppointmentsCard";
+import Clinic from "../components/ClinicCard";
 
-const Dashboard = ({ setAuth }) => {
+const Homepage = ({setAuth}) => {
 
+    //fetch data
     const [name, setName] = useState("");
 
     async function getName() {
@@ -25,23 +24,16 @@ const Dashboard = ({ setAuth }) => {
     useEffect(() => {
         getName()
     }, [])
-
+    //
+    
     return (
     <Fragment>
-        <Navbar setAuth={setAuth}/>
         <div className="container">
-            <h1>Welcome {name}!</h1>
-            <div className="container">
-            <AppointmentsCard />
-                <hr/>
-                <h2>Available Treatments</h2>
-                <hr/>
-                <AvailableTreatments />
-            </div>
-            <hr/>
+            <h1>Home</h1>
+            <Clinic />
         </div>
     </Fragment>
     );
 };
 
-export default Dashboard;
+export default Homepage;
