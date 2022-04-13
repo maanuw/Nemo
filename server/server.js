@@ -35,6 +35,9 @@ app.use('/treatment', require("./routes/treatment"));
 //appointment routes.
 app.use('/appointment', require("./routes/appointment"));
 
+//dentist routes.
+app.use('/dentist', require("./routes/dentist"));
+
 const port = process.env.PORT || 3001;
 app.listen(port, () => {
   console.log(`Server is up and listening on port ${port}.`);

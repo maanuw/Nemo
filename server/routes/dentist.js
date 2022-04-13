@@ -6,9 +6,10 @@ const Patient = require("../class/Patient");
 router.get("/myAppointments", authorization, async (req, res)=>{
     try {
         dentist_id = req.user;
+				console.log(dentist_id);
         const appointments = await pool.query("SELECT * FROM appointments WHERE dentist_id = $1", [
             dentist_id
-        ]); 
+        ]);
         //console.log(branches.rows);
         res.json(appointments.rows);
     } catch (error) {

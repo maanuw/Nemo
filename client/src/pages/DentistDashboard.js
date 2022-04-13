@@ -1,36 +1,46 @@
 import React, { Fragment, useState, useEffect } from "react";
 import Navbar from "../components/Navbar";
-
+import DentistAccordion from "../components/DentistAccordion";
 
 const Dashboard = ({ setAuth }) => {
 
-    const [name, setName] = useState("");
+    const [appointments, setAppointments] = useState([]);
 
-    async function getName() {
+    async function getAppointments() {
         try {
-            const response = await fetch("http://localhost:3001/dashboard/", {
-                method: "GET",
-                headers: { token: localStorage.token }
-            });
-            const parseRes = await response.json();
 
-            setName(parseRes.user_name)
+
+            const getAppointmentData = await fetch("http://localhost:3001/dentist/myAppointments", {
+                method: "GET",
+                headers: {token: localStorage.token}
+            });
+            const parseAppointment = await getAppointmentData.json();
+            console.log(parseAppointment);
+            setAppointments(parseAppointment);
 
         } catch (error) {
             console.error(error.message);
         }
     }
-    
+
     useEffect(() => {
-        getName()
+        getAppointments()
     }, [])
 
     return (
     <Fragment>
         <Navbar setAuth={setAuth}/>
         <div className="container">
-            <h1>Dentist-Portal {name}</h1>
-            
+            <h1>This is the Dentist-Portal </h1>
+
+              {appointments.map((item, index) => {
+                    return (
+                        <div key={index}>
+                            <DentistAccordion data={item} />
+                        </div>
+                    )
+                })}
+
         </div>
     </Fragment>
     );
