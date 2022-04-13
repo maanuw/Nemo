@@ -18,7 +18,7 @@ function AppointmentAccordion({data}) {
             <AccordionItem>
                 <AccordionItemHeading>
                     <AccordionItemButton>
-                        {data.patient_id}
+                        {data.user_name}
                     </AccordionItemButton>
                 </AccordionItemHeading>
                 <AccordionItemPanel>
@@ -37,7 +37,7 @@ function AppointmentAccordion({data}) {
                             Dentist: {data.dentist_id}
                         </p>
                         <p>
-                            Type : {data.appointment_type}
+                            Type : {data.procedure_name}
                         </p>
                         </p>
                         <br />

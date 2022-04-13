@@ -1,9 +1,14 @@
 import React, { Fragment, useState } from "react";
 import {Link} from "react-router-dom";
 import {toast} from "react-toastify";
+import { useLocation } from "react-router-dom"
 
 const Register = ({setAuth}) => {
-
+    const location = useLocation();
+    const myArray = location.pathname.split("/");
+    console.log(myArray[2]);
+    const branch_id = myArray[2];
+    
     const [inputs, setInputs] = useState({
         first_name: "",
         last_name: "",
@@ -31,7 +36,7 @@ const Register = ({setAuth}) => {
         try {
             const name = {first_name, last_name};
             const address = {apartment_no, street_name, city, province, postal_code}
-            const body = {name, username, email, password, address, dob, age, can_reg};
+            const body = {name, username, email, password, address, dob, age, can_reg, branch_id};
             const response = await fetch("http://localhost:3001/auth/register", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
@@ -80,7 +85,16 @@ const Register = ({setAuth}) => {
                     <button className="btn btn-success btn-block btn-padding-x-sm:10px">Submit</button>
                 </div>
             </form>
-            <Link to="/login">Login</Link>
+                <Link
+                    to={{
+                        pathname: "/login/" + branch_id,
+                        state: {
+                            branch: branch_id,
+                            setAuth: false
+                        }
+                    }}>
+                    Login
+                </Link>
             </div>
         </Fragment>
     );

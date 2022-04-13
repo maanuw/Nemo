@@ -3,10 +3,13 @@ import logo from '../assets/Shop.png';
 import location from '../assets/location.png';
 import phone from '../assets/phone.png';
 import '../css/ClientCard.css';
+import {Link} from "react-router-dom";
 
-function AppointmentsCard({data}){
+
+function ClinicCard({data}){
+        //fetch data
+        
     
-
     return (
 
 
@@ -15,6 +18,7 @@ function AppointmentsCard({data}){
         <div class="card text-center cardAttr">
                  <div class="card-header ">
                      <h3 class="clinicName">{data.branch_name} </h3>
+
                  </div>
       
                  <div class="card-body">
@@ -34,18 +38,21 @@ function AppointmentsCard({data}){
                      <p class="card-text">{data.phone_number} </p>
                      </div>
                     
-                     <a href="#" class="btn btn-primary">
-                         <p id="button">Select Branch</p>
-                         </a>
+                     
+                     <Link className="btn btn-primary"
+                            to={{
+                                pathname: "/login/"+data.branch_id,
+                                state: {
+                                    branch :data.branch_id,
+                                    setAuth: false
+                                }
+                            }}>
+                         Select Branch
+                    </Link>
                  </div>
              </div>
-      
       </div>
     )
 }
 
-export default AppointmentsCard;
-
-/**
- * <Button variant="primary">Book Appointment</Button>
- */
+export default ClinicCard;

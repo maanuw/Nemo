@@ -15,12 +15,13 @@ const authorization = require("../middleware/authorization");
 router.post("/register", validInfo, async (req, res) => {
     try {
         //1. destructure the req. body (name, email, username, address, password, dob, etc)
-        const {name, username, email, password, address, dob, age, can_reg} = req.body;
+        const {name, username, email, password, address, dob, age, can_reg, branch_id} = req.body;
 
         const role = "patient";
         //2. check if user exists (if user exists then throw error)
-        const user = await pool.query("SELECT * FROM users WHERE use_email = $1", [
-            email
+        const user = await pool.query("SELECT * FROM users WHERE use_email = $1 AND branch_id = $2", [
+            email,
+            branch_id
         ]);
         if (user.rows.length !== 0){
             console.log(user.rows.length);
@@ -33,7 +34,7 @@ router.post("/register", validInfo, async (req, res) => {
         const brcyptPassword = await bcrypt.hash(password, salt);
 
         //4. enter thee user inside our db
-        const newUser = await pool.query("INSERT INTO users (user_name, use_email, user_password, u_name, user_address, user_dob, age, can_register, user_role) VALUES ($1, $2, $3, jsonb_populate_record(null:: u_name, $4), jsonb_populate_record(null::address, $5), $6, $7, $8, $9) RETURNING *", [username, email, brcyptPassword, name, address, dob, age, can_reg, role]);
+        const newUser = await pool.query("INSERT INTO users (user_name, use_email, user_password, u_name, user_address, user_dob, age, can_register, user_role, branch_id) VALUES ($1, $2, $3, jsonb_populate_record(null:: u_name, $4), jsonb_populate_record(null::address, $5), $6, $7, $8, $9, $10) RETURNING *", [username, email, brcyptPassword, name, address, dob, age, can_reg, role, branch_id]);
 
         //5. generating the jwt.token
         const token = jwtGenerator(newUser.rows[0].user_id);
@@ -51,13 +52,15 @@ router.post("/register", validInfo, async (req, res) => {
 router.post("/login", validInfo, async (req, res) => {
     try {
         // step 1. destructure
-        const {email, password} = req.body;
+        const {email, password, branch_id} = req.body;
+        console.log(branch_id);
         //step2. check if user doesnt exist, if not throw error
-        const user = await pool.query("SELECT * FROM users WHERE use_email = $1", [
-            email
+        const user = await pool.query("SELECT * FROM users WHERE use_email = $1 AND branch_id = $2", [
+            email,
+            branch_id
         ]);
         if (user.rows.length === 0){
-            return res.status(401).json("Password or email incorrect!");
+            return res.status(401).json("Password, email or branch incorrect!");
         }
 
         //step3. check if incooming password same as db password.

@@ -26,12 +26,16 @@ router.post("/", authorization, async (req, res)=>{
     }
 }); 
 
-router.get("/upcoming", authorization, async (req, res) => {
+router.post("/upcoming", authorization, async (req, res) => {
     try {
-        const appointments = await pool.query("SELECT * FROM appointments");
-        //console.log(response);
+        const {branch_id} = req.body;
+        console.log(branch_id);
+        const patient_info = await pool.query("SELECT * FROM appointments AS aa INNER JOIN users AS u ON u.user_id=aa.patient_id INNER JOIN appointment_procedures AS ap ON aa.appointment_type=ap.procedure_id INNER JOIN treatments AS t ON aa.treatment_id=t.treatment_id WHERE u.branch_id=$1",[
+            branch_id
+        ]);
 
-        res.json(appointments.rows);
+        console.log(patient_info.rows);
+        res.json(patient_info.rows);
     } catch (error) {
         console.log(error.message);
         res.status(500).send("Server Error");

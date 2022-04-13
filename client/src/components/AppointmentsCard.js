@@ -7,7 +7,7 @@ function AppointmentsCard(){
     async function getTreatments() {
         try {
             const response = await fetch("http://localhost:3001/dashboard/appointment/myappointments", {
-                method: "GET",
+                method: "POST",
                 headers: { token: localStorage.token }
             });
             const parseRes = await response.json();

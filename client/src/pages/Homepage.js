@@ -4,7 +4,7 @@ import homeImg from "../assets/dental.png";
 import logo from "../assets/shield.png";
 import '../css/Homepage.css';
 
-const Homepage = ({setAuth}) => {
+const Homepage = () => {
 
     //fetch data
     const [clinicData, setData] = useState([]);

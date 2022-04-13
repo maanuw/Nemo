@@ -1,6 +1,6 @@
 import React, {Fragment, useState, useEffect} from 'react'
 import './App.css';
-import {BrowserRouter as Router, Routes, Route, Navigate} from "react-router-dom";
+import {BrowserRouter as Router, Routes, Route, Navigate, Link} from "react-router-dom";
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import 'react-pro-sidebar/dist/css/styles.css';
@@ -48,13 +48,12 @@ function App() {
       <Router>
         <div className="outerContainer">
           <Routes>
-            <Route exact path="/dentistlogin" element={!isAuthenticated ? (<DentistLogin setAuth={setAuth}/>) : ( <Navigate to="/dentist-dashboard" />)}/>
+            <Route exact path="/login/:id" element={!isAuthenticated ? (<Login setAuth={setAuth}/>) : ( <Navigate to="/dashboard" />)}/>
             <Route exact path="/login" element={!isAuthenticated ? (<Login setAuth={setAuth}/>) : ( <Navigate to="/dashboard" />)}/>
-            <Route exact path="/register" element={!isAuthenticated  ? (<Register setAuth={setAuth}/>) : (<Navigate to="/login"/>)} />
-            <Route exact path="/dashboard" element={isAuthenticated ?  (<Dashboard setAuth={setAuth}/>) : (<Navigate to="/login"/>)} />
-            <Route exact path="/dentist-dashboard" element={isAuthenticated ?  (<DentistDashboard setAuth={setAuth}/>) : (<Navigate to="/dentistlogin"/>)} />
+            <Route exact path="/register/:id" element={!isAuthenticated  ? (<Register setAuth={setAuth}/>) : (<Navigate to="/login/:id"/>)} />
+            <Route exact path="/dashboard" element={isAuthenticated ?  (<Dashboard setAuth={setAuth}/>) : (<Navigate to="/"/>)} />
 						<Route exact path="/profile" element={isAuthenticated ?  (<Profile setAuth={setAuth}/>) : (<Navigate to="/profile"/>)} />
-						<Route exact path="/home" element={isAuthenticated ?  (<Homepage setAuth={setAuth}/>) : (<Navigate to="/home"/>)} />
+						<Route exact path="/" element={<Homepage />} />
             <Route exact path="/reception-dashboard" element={isAuthenticated ?  (<ReceptionDashboard setAuth={setAuth}/>) : (<Navigate to="/reception-dashboard"/>)} />
           </Routes>
         </div>
@@ -66,3 +65,8 @@ function App() {
 }
 
 export default App;
+
+
+//            <Route exact path="/dentistlogin" element={!isAuthenticated ? (<DentistLogin setAuth={setAuth}/>) : ( <Navigate to="/dentist-dashboard" />)}/>
+//            <Route exact path="/dentist-dashboard" element={isAuthenticated ?  (<DentistDashboard setAuth={setAuth}/>) : (<Navigate to="/dentistlogin"/>)} />
+//<Route exact path="/reception-dashboard" element={isAuthenticated ?  (<ReceptionDashboard setAuth={setAuth}/>) : (<Navigate to="/reception-dashboard"/>)} />

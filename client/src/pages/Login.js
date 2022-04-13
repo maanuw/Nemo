@@ -1,8 +1,14 @@
 import React, { Fragment, useState } from "react";
 import {Link} from "react-router-dom";
 import {toast} from "react-toastify";
+import { useLocation } from "react-router-dom"
 
-const Login = ({ setAuth }) => {
+const Login = (props) => {
+
+    const location = useLocation();
+    const myArray = location.pathname.split("/");
+    console.log(myArray[2]);
+    const branch_id = myArray[2];
 
     const [inputs, setInputs] = useState({
         email: "",
@@ -18,7 +24,8 @@ const Login = ({ setAuth }) => {
     const onSubmitForm = async (e) =>  {
         e.preventDefault();
         try {
-            const body = {email, password};
+            console.log(typeof(branch));
+            const body = {email, password, branch_id};
             const response = await fetch("http://localhost:3001/auth/login", {
                 method: "POST",
                 headers: {"Content-Type": "application/json"},
@@ -28,10 +35,10 @@ const Login = ({ setAuth }) => {
 
             if (parseRes.token){
                 localStorage.setItem("token", parseRes.token);
-                setAuth(true);
+                props.setAuth(true);
                 toast.success("Logged in successfully");
             }else{
-                setAuth(false);
+                props.setAuth(false);
                 toast.error(parseRes);
             }
 
@@ -44,6 +51,8 @@ const Login = ({ setAuth }) => {
         <Fragment>
             <div className="container">
             <h1 className="text-center my-5">Login</h1>
+            <h1 className="text-center my-5">{props.branch}</h1>
+
             <form onSubmit={onSubmitForm}>
                 <input type="email" name="email" placeholder="E-mail" className="form-control my-3" value={email} onChange={e => onChange(e)} />
                 <input type="password" name="password" placeholder="Password" className="form-control my-3" value={password} onChange={e => onChange(e)} />
@@ -51,7 +60,16 @@ const Login = ({ setAuth }) => {
                     <button className="btn btn-success btn-block btn-padding-x-sm:10px">Submit</button>
                 </div>
             </form>
-            <Link to="/register">Register</Link>
+                <Link
+                    to={{
+                        pathname: "/register/" + branch_id,
+                        state: {
+                            branch: branch_id,
+                            setAuth: false
+                        }
+                    }}>
+                    Register
+                </Link>
             </div>
         </Fragment>
     );
