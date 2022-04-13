@@ -4,6 +4,7 @@ import AvailableTreatments from "../components/TreatmentsCarousel";
 import AppointmentsCard from "../components/AppointmentsCard";
 import DentistDashboard from "./DentistDashboard";
 import ReceptionDashboard from "./ReceptionDashboard";
+
 const Dashboard = ({ setAuth }) => {
 
     const [name, setName] = useState("");
@@ -28,19 +29,19 @@ const Dashboard = ({ setAuth }) => {
     
     useEffect(() => {
         getName()
-    }, [])
+    }, "")
 
 
     if (role === "dentist") {
         return (
-            <DentistDashboard />
+            <DentistDashboard setAuth={setAuth}/>
         );
     } else if(role === "reception_emp" ){
         return (
-            <ReceptionDashboard branch={branchid}/>
+            <ReceptionDashboard setAuth={setAuth}/>
         );
     }
-    else {
+    else if (role === "patient") {
         return (
 
             <Fragment>
@@ -59,7 +60,11 @@ const Dashboard = ({ setAuth }) => {
             </Fragment>
         );
     }
-    
+    return (
+        <Fragment>
+            Loading
+        </Fragment>
+    );
 
 };
 

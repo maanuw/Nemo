@@ -7,30 +7,23 @@ const ReceptionDashboard = ({ setAuth }) => {
     myHeaders.append('Content-Type' ,  'application/json');
     myHeaders.append('token' ,  localStorage.token);
 
-    const [branch, setBranch] = useState("");
     const [appointments, setAppointments] = useState([]);
     
-    async function getBranch() {
+    async function getAppointments() {
         try {
+            //get branch id
             const branch = await fetch("http://localhost:3001/branch/myBranchId", {
                 method: "GET",
                 headers: { token: localStorage.token }
             });
             const parseBranch = await branch.json();
-            setBranch(parseBranch);
-
-        } catch (error) {
-            console.error(error.message);
-        }
-    }
-
-    async function getAppointments() {
-        try {
+            
+            //get all appointments for the branch.
             const getAppointmentData = await fetch("http://localhost:3001/appointment/upcoming", {
                 method: "POST",
                 headers: myHeaders,
                 body: JSON.stringify({
-                    branch_id: branch.branch_id
+                    branch_id: parseBranch.branch_id
                 })
             });
             const parseAppointment = await getAppointmentData.json();
@@ -41,12 +34,11 @@ const ReceptionDashboard = ({ setAuth }) => {
         }
     }
 
-    useEffect(() => {
-        getBranch()
-    }, "")
+
 
     useEffect(() => {
         getAppointments()
+        
     }, []);
 
     return (

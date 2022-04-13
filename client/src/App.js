@@ -53,13 +53,12 @@ function App() {
             <Route exact path="/register/:id" element={!isAuthenticated  ? (<Register setAuth={setAuth}/>) : (<Navigate to="/login/:id"/>)} />
             <Route exact path="/dashboard" element={isAuthenticated ?  (<Dashboard setAuth={setAuth}/>) : (<Navigate to="/"/>)} />
 						<Route exact path="/profile" element={isAuthenticated ?  (<Profile setAuth={setAuth}/>) : (<Navigate to="/profile"/>)} />
-						<Route exact path="/" element={<Homepage />} />
-            <Route exact path="/reception-dashboard" element={isAuthenticated ?  (<ReceptionDashboard setAuth={setAuth}/>) : (<Navigate to="/reception-dashboard"/>)} />
+						<Route exact path="/" element={!isAuthenticated ? (<Homepage setAuth={setAuth}/>) : (<Navigate to='dashboard'/>)} />
           </Routes>
         </div>
       </Router>
 
-      {/*  comments      some code here to print the card as many numbner of times as the clinics in database.*/}      
+      {/*  comments      some code here to print the card as many number of times as the clinics in database.*/}      
     </Fragment>
   );
 }

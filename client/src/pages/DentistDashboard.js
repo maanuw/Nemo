@@ -2,7 +2,7 @@ import React, { Fragment, useState, useEffect } from "react";
 import Navbar from "../components/Navbar";
 
 
-const Dashboard = ({ setAuth }) => {
+const DentistDashboard = ({ setAuth }) => {
 
     const [name, setName] = useState("");
 
@@ -23,7 +23,7 @@ const Dashboard = ({ setAuth }) => {
     
     useEffect(() => {
         getName()
-    }, [])
+    }, "")
 
     return (
     <Fragment>
@@ -36,4 +36,4 @@ const Dashboard = ({ setAuth }) => {
     );
 };
 
-export default Dashboard;
+export default DentistDashboard;
