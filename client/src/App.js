@@ -13,7 +13,6 @@ import Login from "./pages/Login";
 import DentistLogin from "./pages/DentistLogin";
 import DentistDashboard from "./pages/DentistDashboard";
 import Profile from "./pages/Profile";
-import Home from "./pages/Homepage"
 import Homepage from './pages/Homepage';
 import ReceptionDashboard from './pages/ReceptionDashboard';
 toast.configure();
