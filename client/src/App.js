@@ -52,7 +52,7 @@ function App() {
             <Route exact path="/login" element={!isAuthenticated ? (<Login setAuth={setAuth}/>) : ( <Navigate to="/dashboard" />)}/>
             <Route exact path="/register/:id" element={!isAuthenticated  ? (<Register setAuth={setAuth}/>) : (<Navigate to="/login/:id"/>)} />
             <Route exact path="/dashboard" element={isAuthenticated ?  (<Dashboard setAuth={setAuth}/>) : (<Navigate to="/"/>)} />
-						<Route exact path="/profile" element={isAuthenticated ?  (<Profile setAuth={setAuth}/>) : (<Navigate to="/profile"/>)} />
+						<Route exact path="/profile/" element={isAuthenticated ?  (<Profile setAuth={setAuth}/>) : (<Navigate to="/"/>)} />
 						<Route exact path="/" element={!isAuthenticated ? (<Homepage setAuth={setAuth}/>) : (<Navigate to='dashboard'/>)} />
           </Routes>
         </div>

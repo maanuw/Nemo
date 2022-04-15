@@ -41,6 +41,13 @@ app.use('/invoice', require("./routes/invoice"));
 //reception routes.
 app.use('/reception', require("./routes/reception"));
 
+//dentist
+app.use('/dentist', require("./routes/dentist"));
+
+//admin routes
+app.use('/admin', require("./routes/admin"));
+
+
 
 const port = process.env.PORT || 3001;
 app.listen(port, () => {

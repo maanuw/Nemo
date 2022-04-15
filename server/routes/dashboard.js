@@ -24,6 +24,15 @@ router.get("/treatments", authorization, async (req, res)=>{
     }
 });
 
+router.get("/profile", authorization, async (req, res)=>{
+    try {
+        const treatments = await pool.query("SELECT * FROM treatments");
+        res.json(treatments.rows);
+    } catch (error) {
+        console.log(error.message);
+        res.status(500).send("Server Error");
+    }
+});
 
 
 module.exports = router;

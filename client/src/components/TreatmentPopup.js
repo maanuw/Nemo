@@ -33,26 +33,29 @@ function TreatmentPopup({data}) {
         getTreatments()
     }, [])
 
+    
     return (
         <Popup trigger={<button className="btn btn-primary"> Book Appointment </button>} modal>
-        <div className='modal-header'>
-            <h5 className='modal-title'>Available Procedures for this Treatment</h5>
-        </div>
-        <div className="modal-body">
-            {treatmentData.map((item, index) => {
+            <div className='modal-header'>
+                <h5 className='modal-title'>Available Procedures for this Treatment</h5>
+            </div>
+            <div className="modal-body">
+                {treatmentData.map((item, index) => {
                     return (
                         <div key={index}>
-                            <Accordion data={item}/>
+                            <Accordion data={item} />
                         </div>
                     )
                 })}
-        </div>
-        {/* might remove footer*/}
-        <div className="modal-footer">
-            <button type="button" className="btn btn-primary" data-dismiss="modal">Close</button>
-        </div>
+            </div>
+            {/* might remove footer*/}
+            <div className="modal-footer">
+                <button type="button" className="btn btn-primary" data-dismiss="modal">Close</button>
+            </div>
 
-      </Popup>
-)};
+        </Popup>
+    )
+    
+};
 
 export default TreatmentPopup;

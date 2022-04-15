@@ -2,6 +2,7 @@ import React, { Fragment, useState, useEffect } from "react";
 import Navbar from "../components/Navbar";
 import AvailableTreatments from "../components/TreatmentsCarousel";
 import DentistDashboard from "./DentistDashboard";
+import AdminDashboard from "./AdminDashboard";
 import ReceptionDashboard from "./ReceptionDashboard";
 import Table from "../components/PatientAppTable";
 import History from "../components/PatientHistoryTable";
@@ -36,6 +37,10 @@ const Dashboard = ({ setAuth }) => {
         return (
             <DentistDashboard setAuth={setAuth}/>
         );
+    }else if(role === "admin"){
+        return(
+            <AdminDashboard setAuth={setAuth}/>
+        )
     } else if(role === "reception_emp" ){
         return (
             <ReceptionDashboard setAuth={setAuth}/>
