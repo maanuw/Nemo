@@ -35,6 +35,13 @@ app.use('/treatment', require("./routes/treatment"));
 //appointment routes.
 app.use('/appointment', require("./routes/appointment"));
 
+//inovice routes.
+app.use('/invoice', require("./routes/invoice"));
+
+//reception routes.
+app.use('/reception', require("./routes/reception"));
+
+
 const port = process.env.PORT || 3001;
 app.listen(port, () => {
   console.log(`Server is up and listening on port ${port}.`);

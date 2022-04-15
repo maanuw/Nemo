@@ -34,7 +34,20 @@ function TreatmentAccordion({data}) {
             });
             const parseRes = await response.json();
             
-            if(parseRes.state){
+            const today = new Date();
+            const dateToday = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
+            const createInvoice = await fetch("http://localhost:3001/invoice/", {
+                method: "POST",
+                headers: myHeaders,
+                body: JSON.stringify({
+                    appointment_id: parseRes.appointment_id,
+                    status: "unpaid",
+                    issue_date: dateToday
+                })
+            })
+            const invoiceRes = await createInvoice.json();
+
+            if(parseRes.appointment_id ){
                 toast.success("Appointment Scheduled successfully!");
             } else {
                 toast.error("Appointment booking failed!");
