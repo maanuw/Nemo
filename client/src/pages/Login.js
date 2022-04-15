@@ -7,7 +7,6 @@ const Login = (props) => {
 
     const location = useLocation();
     const myArray = location.pathname.split("/");
-    console.log(myArray[2]);
     const branch_id = myArray[2];
 
     const [inputs, setInputs] = useState({
@@ -24,7 +23,6 @@ const Login = (props) => {
     const onSubmitForm = async (e) =>  {
         e.preventDefault();
         try {
-            console.log(typeof(branch));
             const body = {email, password, branch_id};
             const response = await fetch("http://localhost:3001/auth/login", {
                 method: "POST",

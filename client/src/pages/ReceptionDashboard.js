@@ -1,6 +1,6 @@
 import React, { Fragment, useState, useEffect } from "react";
 import Navbar from "../components/Navbar";
-import AppointmentAccordion from "../components/AppointmentAccordion";
+import Table from "../components/ReceptionAppTable";
 
 const ReceptionDashboard = ({ setAuth }) => {
     const myHeaders = new Headers();
@@ -43,17 +43,13 @@ const ReceptionDashboard = ({ setAuth }) => {
 
     return (
     <Fragment>
-        <Navbar setAuth={setAuth}/>
-        <div className="container">
-            <h1>Reception-Portal </h1>
-            {appointments.map((item, index) => {
-                    return (
-                        <div key={index}>
-                            <AppointmentAccordion data={item} />
-                        </div>
-                    )
-                })}
-        </div>
+            <Navbar setAuth={setAuth} />
+            <div className="container">
+                <h1>Reception-Portal </h1>
+                <hr />
+                <h2>Clinic Appointments</h2>
+                <Table data={appointments} />
+            </div>
     </Fragment>
     );
 };

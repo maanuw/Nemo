@@ -1,15 +1,15 @@
 import React, { Fragment, useState, useEffect } from "react";
 import Navbar from "../components/Navbar";
 import AvailableTreatments from "../components/TreatmentsCarousel";
-import AppointmentsCard from "../components/AppointmentsCard";
 import DentistDashboard from "./DentistDashboard";
 import ReceptionDashboard from "./ReceptionDashboard";
+import Table from "../components/PatientAppTable";
+import History from "../components/PatientHistoryTable";
 
 const Dashboard = ({ setAuth }) => {
 
     const [name, setName] = useState("");
     const [role, setRole] = useState("");
-    const [branchid, setBranchid] = useState("");
 
     async function getName() {
         try {
@@ -21,7 +21,7 @@ const Dashboard = ({ setAuth }) => {
 
             setName(parseRes.user_name);
             setRole(parseRes.user_role);
-            setBranchid(parseRes.branch_id);
+            
         } catch (error) {
             console.error(error.message);
         }
@@ -48,9 +48,20 @@ const Dashboard = ({ setAuth }) => {
                 <Navbar setAuth={setAuth} />
                 <div className="container">
                     <h1>Welcome {name}!</h1>
+                    <hr />
                     <div className="container">
-                        <AppointmentsCard />
-                        <hr />
+                        <div className="row align-items-start">
+                            <div className="col">
+                                <h2>Upcoming Appointments</h2>
+                                <Table />
+                            </div>
+                            <div className="col">
+                                <h2>History</h2>
+                                <History />
+                            </div>
+                        </div>
+                    </div>
+                    <div className="container">
                         <h2>Available Treatments</h2>
                         <hr />
                         <AvailableTreatments />

@@ -53,7 +53,6 @@ router.post("/login", validInfo, async (req, res) => {
     try {
         // step 1. destructure
         const {email, password, branch_id} = req.body;
-        console.log(branch_id);
         //step2. check if user doesnt exist, if not throw error
         const user = await pool.query("SELECT * FROM users WHERE use_email = $1 AND branch_id = $2", [
             email,

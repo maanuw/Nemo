@@ -6,7 +6,6 @@ import { useLocation } from "react-router-dom"
 const Register = ({setAuth}) => {
     const location = useLocation();
     const myArray = location.pathname.split("/");
-    console.log(myArray[2]);
     const branch_id = myArray[2];
     
     const [inputs, setInputs] = useState({
