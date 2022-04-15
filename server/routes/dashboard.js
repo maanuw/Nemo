@@ -34,5 +34,18 @@ router.get("/profile", authorization, async (req, res)=>{
     }
 });
 
+router.get("/role", authorization, async (req, res)=>{
+    try {
+        const user_id = req.user;
+        const role = await pool.query("SELECT * FROM users WHERE user_id=$1",[
+            user_id
+        ]);
+        res.json(role.rows[0]);
+    } catch (error) {
+        console.log(error.message);
+        res.status(500).send("Server Error");
+    }
+});
+
 
 module.exports = router;

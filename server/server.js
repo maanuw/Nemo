@@ -47,6 +47,11 @@ app.use('/dentist', require("./routes/dentist"));
 //admin routes
 app.use('/admin', require("./routes/admin"));
 
+//invoice
+app.use('/invoice', require("./routes/invoice"));
+
+
+
 
 
 const port = process.env.PORT || 3001;

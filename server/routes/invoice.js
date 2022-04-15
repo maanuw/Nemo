@@ -23,5 +23,20 @@ router.post("/",authorization ,async (req, res)=>{
     }
 });
 
+router.post("/getDetails",authorization ,async (req, res)=>{
+    try {
+        const {appointment_id} = req.body;
+        console.log(req.body);
+        const invoice = await pool.query("SELECT * FROM invoices WHERE appointment_id=$1", [
+            appointment_id,
+        ]); 
+        console.log(invoice);
+        res.json(invoice.rows);
+    } catch (error) {
+        console.log(error.message);
+        res.status(500).send("Server Error");
+    }
+});
+
 
 module.exports = router;

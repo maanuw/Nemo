@@ -86,7 +86,16 @@ router.get("/addDentist", authorization, async (req, res)=>{
 
 router.post("/addProcedure", authorization, async (req, res)=>{
     try {
-        const{ treatment_id, procedure_description, procedure_name } = req.body;
+
+        const{ treatment_name, procedure_description, procedure_name } = req.body;
+        console.log(treatment_name);
+        const treatment = await pool.query("SELECT * FROM treatments WHERE treatment_name = $1", [
+            treatment_name
+        ]);
+
+        const treatment_id = treatment.rows[0].treatment_id;
+        console.log(treatment_id);
+
         const admin = await pool.query("INSERT INTO appointment_procedures (treatment_id, procedure_description, procedure_name) VALUES ($1, $2, $3)", [
             treatment_id,
             procedure_description,

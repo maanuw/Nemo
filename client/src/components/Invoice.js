@@ -1,70 +1,144 @@
-import React, {  useState, useEffect } from "react";
-import {toast} from "react-toastify";
+import React, { useState, useEffect } from "react";
+import { toast } from "react-toastify";
+import "../css/Invoice.css"
 
 
-function Invoice({data}) {
+function Invoice({ data }) {
     const myHeaders = new Headers();
     myHeaders.append('Content-Type' ,  'application/json');
     myHeaders.append('token' ,  localStorage.token);
-    const dateArray = data.appointment_date.split("T");
-    const strippedDate = dateArray[0];
-    const appointment_id = data.appointment_id;
-
-    const [inputs, setInputs] = useState({
-        status: data.status,
-        appt_start_time: data.appt_start_time,
-        appointment_date: strippedDate,
-    });
-
-    const { status, appt_start_time, appointment_date } = inputs;   
-
-
-    const onChange = (e) => {
-        setInputs({ ...inputs, [e.target.name]: e.target.value });
-    };
-
-    const onSubmitForm = async (e) => {
-        e.preventDefault(); //on clicking submit by default it refreshes the page. but the statement on the left prevents this behaviour
+   
+    const [invoice, setInvoiceDetails] = useState([]);
+    async function getInvoiceDetails(branch) {
         try {
-            if (status === "cancelled"){
-                const body = {status, appointment_id};
-                const response = await fetch("http://localhost:3001/appointment/cancel", {
-                    method: "POST",
-                    headers: myHeaders,
-                    body: JSON.stringify(body)
-                });
-                const parseRes = await response.json();
-                if(parseRes.state){
-                    toast.success("Appointment Cancelled successfully!");
-                } else {
-                    toast.error("Appointment Cancellation failed!");
-                }
-            }else{
-                console.log(appointment_id);
-                const body = {status, appt_start_time, appointment_date, appointment_id};
-                const response = await fetch("http://localhost:3001/appointment/update", {
-                    method: "POST",
-                    headers: myHeaders,
-                    body: JSON.stringify(body)
-                });
-                
-                const parseRes = await response.json();
-                if(parseRes.state){
-                    toast.success("Appointment updated successfully!");
-                } else {
-                    toast.error( "Failed to save changes!");
-                }
-
-            }
-
-
+            const invoiceResponse = await fetch("http://localhost:3001/invoice/getDetails", {
+                method: "POST",
+                headers: myHeaders,
+                body: JSON.stringify({
+                    appointment_id: data.appointment_id
+                })
+            });
+            const invoiceRes = await invoiceResponse.json();
+            setInvoiceDetails(invoiceRes);
         } catch (error) {
-            console.error(error.message);
+            console.log(error.message);
         }
     }
-    return (
-        <h1>Coming Soon!</h1>    )
-    
-}
 
-export default Invoice;
+    useEffect(() => {
+        getInvoiceDetails()
+    }, [])
+
+
+  
+    return (
+            <div class="container">
+                <div class="row">
+                    <div class="col-xs-12">
+                        <div class="invoice-title">
+                            <h2>Invoice</h2><h3 class="pull-right">Order id {invoice.invoice_id}</h3>
+                        </div>
+                        <hr/>
+                            <div class="row">
+                                <div class="col-xs-6">
+                                    <address>
+                                        <strong>Billed To:</strong><br/>
+                                            {data.u_name}<br/>
+                                                1234 Main<br/>
+                                                    Apt. 4B<br/>
+                                                        Springfield, ST 54321
+                                                    </address>
+                                                </div>
+                                                <div class="col-xs-6 text-right">
+                                                    <address>
+                                                        <strong>Shipped To:</strong><br/>
+                                                            Jane Smith<br/>
+                                                                1234 Main<br/>
+                                                                    Apt. 4B<br/>
+                                                                        Springfield, ST 54321
+                                                                    </address>
+                                                                </div>
+                                                            </div>
+                                                            <div class="row">
+                                                                <div class="col-xs-6">
+                                                                    <address>
+                                                                        <strong>Payment Method:</strong><br/>
+                                                                            Visa ending **** 4242<br/>
+                                                                                jsmith@email.com
+                                                                            </address>
+                                                                        </div>
+                                                                        <div class="col-xs-6 text-right">
+                                                                            <address>
+                                                                                <strong>Order Date:</strong><br/>
+                                                                                    March 7, 2014<br/><br/>
+                                                                                    </address>
+                                                                                    </div>
+                                                                                </div>
+                                                                        </div>
+                                                                </div>
+
+                                                                <div class="row">
+                                                                    <div class="col-md-12">
+                                                                        <div class="panel panel-default">
+                                                                            <div class="panel-heading">
+                                                                                <h3 class="panel-title"><strong>Order summary</strong></h3>
+                                                                            </div>
+                                                                            <div class="panel-body">
+                                                                                <div class="table-responsive">
+                                                                                    <table class="table table-condensed">
+                                                                                        <thead>
+                                                                                            <tr>
+                                                                                                <td><strong>Item</strong></td>
+                                                                                                <td class="text-center"><strong>Price</strong></td>
+                                                                                                <td class="text-center"><strong>Quantity</strong></td>
+                                                                                                <td class="text-right"><strong>Totals</strong></td>
+                                                                                            </tr>
+                                                                                        </thead>
+                                                                                        <tbody>
+                                                                                            <tr>
+                                                                                                <td>BS-200</td>
+                                                                                                <td class="text-center">$10.99</td>
+                                                                                                <td class="text-center">1</td>
+                                                                                                <td class="text-right">$10.99</td>
+                                                                                            </tr>
+                                                                                            <tr>
+                                                                                                <td>BS-400</td>
+                                                                                                <td class="text-center">$20.00</td>
+                                                                                                <td class="text-center">3</td>
+                                                                                                <td class="text-right">$60.00</td>
+                                                                                            </tr>
+                                                                                            <tr>
+                                                                                                <td>BS-1000</td>
+                                                                                                <td class="text-center">$600.00</td>
+                                                                                                <td class="text-center">1</td>
+                                                                                                <td class="text-right">$600.00</td>
+                                                                                            </tr>
+                                                                                            <tr>
+                                                                                                <td class="thick-line"></td>
+                                                                                                <td class="thick-line"></td>
+                                                                                                <td class="thick-line text-center"><strong>Subtotal</strong></td>
+                                                                                                <td class="thick-line text-right">$670.99</td>
+                                                                                            </tr>
+                                                                                            <tr>
+                                                                                                <td class="no-line"></td>
+                                                                                                <td class="no-line"></td>
+                                                                                                <td class="no-line text-center"><strong>Shipping</strong></td>
+                                                                                                <td class="no-line text-right">$15</td>
+                                                                                            </tr>
+                                                                                            <tr>
+                                                                                                <td class="no-line"></td>
+                                                                                                <td class="no-line"></td>
+                                                                                                <td class="no-line text-center"><strong>Total</strong></td>
+                                                                                                <td class="no-line text-right">$685.99</td>
+                                                                                            </tr>
+                                                                                        </tbody>
+                                                                                    </table>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>                            
+    )
+}
+ export default Invoice;

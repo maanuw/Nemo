@@ -69,7 +69,7 @@ const Dashboard = ({ setAuth }) => {
                     <div className="container">
                         <h2>Available Treatments</h2>
                         <hr />
-                        <AvailableTreatments />
+                        <AvailableTreatments data={role}/>
                     </div>
                     <hr />
                 </div>

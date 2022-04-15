@@ -47,10 +47,10 @@ function TreatmentsCarousel({data}){
         return (
             <>
             <Carousel
-                arrows={false}
+                arrows={true}
                 swipeable={false}
                 draggable={false}
-                showDots={true}
+                showDots={false}
                 renderDotsOutside={true}
                 responsive={responsive}
                 ssr={true} // means to render carousel on server-side.
@@ -62,9 +62,9 @@ function TreatmentsCarousel({data}){
                 containerClass="carousel-container"
                 removeArrowOnDeviceType={["tablet", "mobile"]}
                 dotListClass="custom-dot-list-style"
-                itemClass="carousel-item-padding-40-px"
+                itemClass="carousel-item-padding-60-px"
                 shouldResetAutoplay={true}
-                centerMode={false}
+                centerMode={true}
             >
                 {treatments.map((item, index) => {
                     return (
@@ -83,10 +83,10 @@ function TreatmentsCarousel({data}){
         return (
             <>
                 <Carousel
-                    arrows={false}
+                    arrows={true}
                     swipeable={false}
                     draggable={false}
-                    showDots={true}
+                    showDots={false}
                     renderDotsOutside={true}
                     responsive={responsive}
                     ssr={true} // means to render carousel on server-side.
@@ -100,7 +100,7 @@ function TreatmentsCarousel({data}){
                     dotListClass="custom-dot-list-style"
                     itemClass="carousel-item-padding-40-px"
                     shouldResetAutoplay={true}
-                    centerMode={false}
+                    centerMode={true}
                 >
                     {treatments.map((item, index) => {
                         return (
