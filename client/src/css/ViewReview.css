@@ -1,0 +1,35 @@
+.card-container{
+    width:700px;
+    height:150px;
+    border-radius: 10px;
+    background-color: rgba(69, 151, 247, 0.22);
+  }
+  
+  h1{
+    margin-top:25px;
+    font-weight:800;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+  }
+  h2{
+    display:flex;
+    justify-content:center;
+  }
+  #users{
+    width:100px;
+    border-radius:10px;
+    border-color:black;
+  }
+  
+  #comment-section{
+    margin-left:100px;
+  }
+  
+  #user{
+    background-color:white;
+    width:145px;
+    border-radius:10px;
+    margin-top:20px;
+    margin-left:30px;
+  }

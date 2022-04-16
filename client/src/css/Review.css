@@ -1,0 +1,10 @@
+.rev-scrollable-div {
+    background-color: #f1f1f1;
+    height: 300px;
+    width: 550px;
+    overflow-x: auto;
+    overflow-y: auto;
+    text-align: justify;
+    padding: 10px;
+  }
+  

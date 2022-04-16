@@ -9,8 +9,8 @@ function Record({data}) {
     if(data.status === "completed"){
         return (
             <div className="modal-dialog modal-dialog-scrollable">
-                <h4>{data.treatment_name} Treatment</h4>
-                <h5>Procedure: {data.procedure_name}</h5>
+                <h4>{data.treatment_name.replace(/[^\p{L}\p{N}\p{Z}]/gu, ' ')} Treatment</h4>
+                <h5>Procedure: {data.procedure_name.replace(/[^\p{L}\p{N}\p{Z}]/gu, ' ')}</h5>
                 <h5>Date: {strippedDate} Time: {data.appt_start_time} [24 Hour Format]</h5>
                 <div className='container border'>
                     <h4>Doctors Notes:</h4>

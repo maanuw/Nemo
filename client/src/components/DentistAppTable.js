@@ -40,11 +40,11 @@ function DentistAppTable(){
                 {data.map((item, index) => {
                     return (
                         <tr key={index}>
-                            <td>{item.procedure_name}</td>
-                            <td>{item.u_name}</td>
-                            <td>{item.appt_start_time}</td>
+                            <td>{item.procedure_name.replace(/[^\p{L}\p{N}\p{Z}]/gu, ' ')}</td>
+                            <td>{item.u_name.replace(/[^\p{L}\p{N}\p{Z}]/gu, ' ')}</td>
+                            <td>{item.appt_start_time.replace(/[^\p{L}\p{N}\p{Z}]/gu, ' ')}</td>
                             <td>{item.appointment_date.split("T")[0]}</td>
-                            <td>{item.status}</td>
+                            <td>{item.status.replace(/[^\p{L}\p{N}\p{Z}]/gu, ' ')}</td>
                             <td><AppointmentPopup data={item}/></td>
                         </tr>
                     )

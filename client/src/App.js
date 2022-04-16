@@ -15,6 +15,9 @@ import DentistDashboard from "./pages/DentistDashboard";
 import Profile from "./pages/Profile";
 import Homepage from './pages/Homepage';
 import ReceptionDashboard from './pages/ReceptionDashboard';
+import ReviewPage from './pages/ReviewPage';
+import ReviewsPopup from './components/ReviewPopup';
+
 toast.configure();
 
 function App() {
@@ -53,12 +56,12 @@ function App() {
             <Route exact path="/register/:id" element={!isAuthenticated  ? (<Register setAuth={setAuth}/>) : (<Navigate to="/login/:id"/>)} />
             <Route exact path="/dashboard" element={isAuthenticated ?  (<Dashboard setAuth={setAuth}/>) : (<Navigate to="/"/>)} />
 						<Route exact path="/profile/" element={isAuthenticated ?  (<Profile setAuth={setAuth}/>) : (<Navigate to="/"/>)} />
-						<Route exact path="/" element={!isAuthenticated ? (<Homepage setAuth={setAuth}/>) : (<Navigate to='dashboard'/>)} />
+						<Route exact path="/" element={!isAuthenticated ? (<Homepage setAuth={setAuth}/>) : (<Navigate to='/dashboard'/>)} />
+            <Route exact path="/reviews" element={isAuthenticated ? (<ReviewPage setAuth={setAuth}/>) : (<Navigate to='/view-reviews'/>)} />
+            <Route exact path="/view-reviews/:id" element={!isAuthenticated ? (<ReviewsPopup setAuth={setAuth}/>) : (<Navigate to='/'/>)} />
           </Routes>
         </div>
       </Router>
-
-      {/*  comments      some code here to print the card as many number of times as the clinics in database.*/}      
     </Fragment>
   );
 }

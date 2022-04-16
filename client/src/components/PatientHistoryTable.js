@@ -39,11 +39,11 @@ function PatientHistoryTable(){
                 {data.map((item, index) => {
                     return (
                         <tr key={index}>
-                            <td>{item.procedure_name}</td>
-                            <td>{item.appt_start_time}</td>
+                            <td>{item.procedure_name.replace(/[^\p{L}\p{N}\p{Z}]/gu, ' ')}</td>
+                            <td>{item.appt_start_time.replace(/[^\p{L}\p{N}\p{Z}]/gu, ' ')}</td>
                             <td>{item.appointment_date.split("T")[0]}</td>
-                            <td>{item.status}</td>
-                            <td>{item.dentist_name}</td>
+                            <td>{item.status.replace(/[^\p{L}\p{N}\p{Z}]/gu, ' ')}</td>
+                            <td>{item.dentist_name.replace(/[^\p{L}\p{N}\p{Z}]/gu, ' ')}</td>
                             <td><HistoryPopup data={item}/></td>
                         </tr>
                     )

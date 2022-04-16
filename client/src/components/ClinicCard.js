@@ -4,6 +4,7 @@ import location from '../assets/location.png';
 import phone from '../assets/phone.png';
 import '../css/ClientCard.css';
 import {Link} from "react-router-dom";
+import Reviews from "../components/ReviewPopup";
 
 
 function ClinicCard({data}){
@@ -29,7 +30,7 @@ function ClinicCard({data}){
                      <div class="branchAttribute">
                      <img class="sidelogo"src={location}/>
                         <p>Location: </p> 
-                     <h5 class="card-title">{data.address}</h5>
+                     <h5 class="card-title">{data.address.replace(/[^\p{L}\p{N}\p{Z}]/gu, ' ')}</h5>
                      </div>
                      
                      <div class="branchAttribute">
@@ -48,6 +49,16 @@ function ClinicCard({data}){
                                 }
                             }}>
                          Select Branch
+                    </Link>
+                    <Link className="btn btn-secondary"
+                            to={{
+                                pathname: "/view-reviews/"+data.branch_id,
+                                state: {
+                                    data : data,
+                                    setAuth: false
+                                }
+                            }}>
+                         Reviews
                     </Link>
                  </div>
              </div>

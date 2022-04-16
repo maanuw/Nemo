@@ -67,7 +67,7 @@ const Dashboard = ({ setAuth }) => {
                         </div>
                     </div>
                     <div className="container">
-                        <h2>Available Treatments</h2>
+                        <h2 className="text-center my-5">Available Treatments</h2>
                         <hr />
                         <AvailableTreatments data={role}/>
                     </div>

@@ -75,7 +75,7 @@ function AppointmentPopup({data}) {
             <div className="modal-body">
                 <form onSubmit={onSubmitForm}>
                     <select className="form-select" name="status" value={status} onChange={e => onChange(e)}>
-                        <option selected>{data.status}</option>
+                        <option selected>{data.status.replace(/[^\p{L}\p{N}\p{Z}]/gu, ' ')}</option>
                         <option value="cancelled">Cancel Appointment</option>
                     </select>
                     <input type="date" name="appointment_date" placeholder="Date" className="form-control my-3" value={appointment_date} onChange={e => onChange(e)} />

@@ -31,13 +31,13 @@ function AppointmentAccordion({data}) {
                             Date: {data.appointment_date}
                         </p>
                         <p>
-                            Status: {data.status}
+                            Status: {data.status.replace(/[^\p{L}\p{N}\p{Z}]/gu, ' ')}
                         </p>
                         <p>
-                            Dentist: {data.dentist_id}
+                            Dentist: {data.dentist_id.replace(/[^\p{L}\p{N}\p{Z}]/gu, ' ')}
                         </p>
                         <p>
-                            Type : {data.procedure_name}
+                            Type : {data.procedure_name.replace(/[^\p{L}\p{N}\p{Z}]/gu, ' ')}
                         </p>
                         </p>
                         <br />

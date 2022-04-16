@@ -1,0 +1,29 @@
+.container{
+    width:500px;
+    height:500px;
+    border-radius: 10px;
+    border-color:black;
+  }
+  h1{
+    margin-top:25px;
+    font-weight:800;
+  }
+  .button-section{
+      margin-top:25px;
+      display: flex;
+      justify-content: center;
+  }
+  .comment-section{
+    margin-top:20px;
+    margin-left:20px;
+  }
+  #comment{
+    width:400px;
+    height:200px;
+    display: block;
+    justify-content:center;
+  }
+  #cancel{
+    margin-left:10px;
+    background-color: rgba(196, 196, 196, 0.67);
+  }
