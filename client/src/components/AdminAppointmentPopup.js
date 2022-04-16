@@ -58,6 +58,7 @@ function AdminAppointmentPopup({data}) {
                     <select className="form-select my-3" name="status" value={status} onChange={e => onChange(e)}>
                         <option selected>{data.user_role}</option>
                         <option value="dentist">Change status to Dentist</option>
+                        
                     </select>
                     <button className="btn btn-success btn-block btn-padding-x-sm:10px">Save</button>
                 </form>
