@@ -14,11 +14,9 @@ function Record({data}) {
                 <h5>Date: {strippedDate} Time: {data.appt_start_time} [24 Hour Format]</h5>
                 <div className='container border'>
                     <h4>Doctors Notes:</h4>
-                    <hr />
-                    <h4>Medication</h4>
-                    <hr />
-                    <h4>Recommendation</h4>
-                    <hr />
+                    <hr />{}
+                    <h6>{data.doc_comments}</h6>
+         
                 </div>
                 <div className='container border'>
                     <h5>Dentist Profile</h5>

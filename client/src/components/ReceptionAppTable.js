@@ -17,6 +17,7 @@ function ReceptionAppTable({data}){
                     <th>Status</th>
                     <th>Dentist Name</th>
                     <th>Edit</th>
+                    <th>Fees</th>
 
                 </tr>
                 {data.map((item, index) => {

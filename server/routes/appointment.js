@@ -30,7 +30,7 @@ router.post("/", authorization, async (req, res)=>{
 router.post("/upcoming", authorization, async (req, res) => {
     try {
         const {branch_id} = req.body;
-        const patient_info = await pool.query("SELECT * FROM appointments AS aa INNER JOIN users AS u ON u.user_id=aa.patient_id INNER JOIN appointment_procedures AS ap ON aa.appointment_type=ap.procedure_id INNER JOIN treatments AS t ON aa.treatment_id=t.treatment_id WHERE u.branch_id=$1",[
+        const patient_info = await pool.query("SELECT * FROM appointments AS aa INNER JOIN users AS u ON u.user_id=aa.patient_id INNER JOIN appointment_procedures AS ap ON aa.appointment_type=ap.procedure_id INNER JOIN treatments AS t ON aa.treatment_id=t.treatment_id INNER JOIN fee AS f ON f.procedure_id=aa.appointment_type WHERE u.branch_id=$1",[
             branch_id
         ]);
 
@@ -45,7 +45,7 @@ router.get("/history", authorization, async (req, res)=>{
     try {
 
         const patient_id = req.user;
-        const appointment = await pool.query("SELECT * FROM appointments AS aa INNER JOIN appointment_procedures AS ap ON aa.appointment_type=ap.procedure_id INNER JOIN treatments AS t ON aa.treatment_id=t.treatment_id INNER JOIN dentists AS d ON d.d_id=aa.dentist_id WHERE aa.patient_id=$1 AND (aa.status=$2 OR aa.status=$3 OR aa.status=$4 OR aa.status=$5);", [
+        const appointment = await pool.query("SELECT * FROM appointments AS aa INNER JOIN appointment_procedures AS ap ON aa.appointment_type=ap.procedure_id INNER JOIN treatments AS t ON aa.treatment_id=t.treatment_id INNER JOIN dentists AS d ON d.d_id=aa.dentist_id INNER JOIN fee AS f ON f.procedure_id=aa.appointment_type WHERE aa.patient_id=$1 AND (aa.status=$2 OR aa.status=$3 OR aa.status=$4 OR aa.status=$5);", [
             patient_id,
             "cancelled",
             "completed",
@@ -64,7 +64,7 @@ router.get("/myAppointments", authorization, async (req, res)=>{
     try {
 
         const patient_id = req.user;
-        const appointment = await pool.query("SELECT * FROM appointments AS aa INNER JOIN appointment_procedures AS ap ON aa.appointment_type=ap.procedure_id INNER JOIN treatments AS t ON aa.treatment_id=t.treatment_id INNER JOIN dentists AS d ON d.d_id=aa.dentist_id WHERE aa.patient_id=$1 AND aa.status=$2", [
+        const appointment = await pool.query("SELECT * FROM appointments AS aa INNER JOIN appointment_procedures AS ap ON aa.appointment_type=ap.procedure_id INNER JOIN treatments AS t ON aa.treatment_id=t.treatment_id INNER JOIN dentists AS d ON d.d_id=aa.dentist_id INNER JOIN fee AS f ON f.procedure_id=aa.appointment_type WHERE aa.patient_id=$1 AND aa.status=$2", [
             patient_id,
             "scheduled"
         ]);

@@ -1,6 +1,6 @@
 import React, {  useState, useEffect } from "react";
 import '../css/AdminTable.css';
-import AppointmentPopup from "./DentistAppointmentPopup";
+import AppointmentPopup from "./AdminAppointmentPopup";
 
 
 function ListOfPatients({data}){

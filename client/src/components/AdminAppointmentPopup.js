@@ -6,22 +6,18 @@ import {toast} from "react-toastify";
 import {useState} from 'react';
 
 
-function AppointmentPopup({data}) {
+function AdminAppointmentPopup({data}) {
     const myHeaders = new Headers();
-    console.log(data);
     myHeaders.append('Content-Type' ,  'application/json');
     myHeaders.append('token' ,  localStorage.token);
-    const dateArray = data.appointment_date.split("T");
-    const strippedDate = dateArray[0];
     const appointment_id = data.appointment_id;
     
     const [inputs, setInputs] = useState({
         status: data.status,
-        appt_start_time: data.appt_start_time,
-        appointment_date: strippedDate,
+        doc_comments: data.doc_comments
     });
 
-    const { status, appt_start_time, appointment_date } = inputs;   
+    const { status, doc_comments} = inputs;   
 
 
     const onChange = (e) => {
@@ -31,23 +27,9 @@ function AppointmentPopup({data}) {
     const onSubmitForm = async (e) => {
         e.preventDefault(); //on clicking submit by default it refreshes the page. but the statement on the left prevents this behaviour
         try {
-            if (status === "cancelled"){
-                const body = {status, appointment_id};
-                const response = await fetch("http://localhost:3001/appointment/cancel", {
-                    method: "POST",
-                    headers: myHeaders,
-                    body: JSON.stringify(body)
-                });
-                const parseRes = await response.json();
-                if(parseRes.state){
-                    toast.success("Appointment Cancelled successfully!");
-                } else {
-                    toast.error("Appointment Cancellation failed!");
-                }
-            }else{
                 console.log(appointment_id);
-                const body = {status, appt_start_time, appointment_date, appointment_id};
-                const response = await fetch("http://localhost:3001/appointment/update", {
+                const body = {status, doc_comments, appointment_id};
+                const response = await fetch("http://localhost:3001/dentist/note", {
                     method: "POST",
                     headers: myHeaders,
                     body: JSON.stringify(body)
@@ -59,10 +41,6 @@ function AppointmentPopup({data}) {
                 } else {
                     toast.error( "Failed to save changes!");
                 }
-
-            }
-
-
         } catch (error) {
             console.error(error.message);
         }
@@ -71,17 +49,16 @@ function AppointmentPopup({data}) {
     return (
         <Popup trigger={<button className="btn btn-success"> Edit </button>} modal>
             <div className='modal-header'>
-                <h5 className='modal-title'>My Appointment Card</h5>
+                <h5 className='modal-title'>{data.u_name}: Admin Access Card</h5>
             </div>
             <div className="modal-body">
                 <form onSubmit={onSubmitForm}>
-                    <select className="form-select" name="status" value={status} onChange={e => onChange(e)}>
-                        <option selected>{data.status}</option>
-                        <option value="cancelled">Cancel Appointment</option>
+                    <h4>Change Role:</h4>
+                    Email: {data.user_email}
+                    <select className="form-select my-3" name="status" value={status} onChange={e => onChange(e)}>
+                        <option selected>{data.user_role}</option>
+                        <option value="dentist">Change status to Dentist</option>
                     </select>
-                    <input type="date" name="appointment_date" placeholder="Date" className="form-control my-3" value={appointment_date} onChange={e => onChange(e)} />
-                    <input type="time" name="appt_start_time" placeholder="Time" className="form-control my-3" value={appt_start_time} onChange={e => onChange(e)} />
-                    <label>Fees:$ {data.amount}</label><br/>
                     <button className="btn btn-success btn-block btn-padding-x-sm:10px">Save</button>
                 </form>
             </div>
@@ -93,4 +70,4 @@ function AppointmentPopup({data}) {
         </Popup>
 )};
 
-export default AppointmentPopup;
+export default AdminAppointmentPopup;

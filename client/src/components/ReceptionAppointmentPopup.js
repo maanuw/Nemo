@@ -94,6 +94,7 @@ function ReceptionAppointmentPopup({data}) {
                             )
                         })}
                     </select>
+                    <label>Fee: {data.amount}</label>
                     <input type="date" name="appointment_date" placeholder="Date" className="form-control my-3" value={appointment_date} onChange={e => onChange(e)} />
                     <input type="time" name="appt_start_time" placeholder="Time" className="form-control my-3" value={appt_start_time} onChange={e => onChange(e)} />
                     <button className="btn btn-success btn-block btn-padding-x-sm:10px">Save</button>
