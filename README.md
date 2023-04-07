@@ -1,5 +1,7 @@
 ### Nemo - Dental Clinic Management System
 
+Project presentation: https://youtu.be/15Gk7NvhvkI![image](https://user-images.githubusercontent.com/57678262/230673456-b10ba01b-f7e6-43dc-9f5a-a37013b6958e.png)
+
 ## Setting up local environment:
 
 Prerequisites:
